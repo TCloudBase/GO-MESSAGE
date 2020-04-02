@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+    <title>留言板</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body class="container-md">
+<h3>{{.title}}</h3>
+<div>
+    <form action="/feedback" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <textarea class="form-control" name="content" id="content" cols="50" rows="5"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="file">附件</label>
+            <input type="file" class="form-control-file" name="file" id="">
+        </div>
+        <div class="form-group">
+            <label for="username">名字</label>
+            <input type="text" name="username" class="form-control"></div>
+        <div class="form-group"><input type="submit" value="提交" class="btn btn-primary"></div>
+    </form>
+    <h2>内容</h2>
+    <div class="list-group list-group-flush">
+        {{range .list}}
+        <div class="list-group-item">
+            <div><span><b>{{.Username}} 在 {{.CreateTime}} 说：</b></span></div>
+            <div><p>{{.Content}}</p></div>
+            {{if ne .FileID ""}}<div><span class="badge badge-info">文件:</span> <a target="_blank" href="/file?id={{.FileID}}">{{.FilePath}}</a></div>{{end}}
+        </div>
+        {{end}}
+    </div>
+    <div>
+        <span>第{{.page}}页</span>
+        {{if gt .page 1}}<a href="/?page={{.prevPage}}">上一页</a>{{end}}
+       {{if lt .page .totalPage}} <a href="/?page={{.nextPage}}">下一页</a>{{end}}
+    </div>
+</div>
+</body>
+</html>
