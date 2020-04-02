@@ -1,4 +1,4 @@
-本仓库源地址为：[GO-DENO](https://github.com/go-demo/guestbook)
+本仓库源地址为：[GO-DEMO](https://github.com/go-demo/guestbook)
 
 # 留言板应用 - 开源框架案例小程序-云开发 GO SDK
 
